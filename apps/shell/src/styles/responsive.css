@@ -95,6 +95,12 @@
     border-left: none;
   }
 
+  /* Prevent pane content from being hidden behind the bottom nav bar */
+  .arch-pane-body,
+  .arch-pane-content {
+    padding-bottom: calc(1.25rem + 72px);
+  }
+
   .loading-state { @apply px-3; }
   .empty-state   { @apply px-4 py-12; }
   .empty-state-icon { @apply w-12 h-12; }
@@ -210,6 +216,11 @@
 
     #main-content {
       padding-bottom: calc(80px + env(safe-area-inset-bottom));
+    }
+
+    .arch-pane-body,
+    .arch-pane-content {
+      padding-bottom: calc(1.25rem + 72px + env(safe-area-inset-bottom));
     }
   }
 }
