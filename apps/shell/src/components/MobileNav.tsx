@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FrameworkBadge } from "@my-portal/ui";
 import { NAV_ITEMS } from "../utils/navigation";
@@ -15,6 +15,40 @@ export function MobileNav({ isOpen, onClose, setLoading, setErrorMessage }: Mobi
   const navigate = useNavigate();
   const drawerRef = useRef<HTMLDivElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+  // Controls the CSS transition class — kept separate from isOpen so the
+  // element stays mounted during the close transition on iOS WebKit.
+  const [visible, setVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // When isOpen flips true: mount immediately, then add the visible class on
+  // the next animation frame so the CSS transition fires (iOS WebKit requires
+  // the element to be painted in its initial state before transitioning).
+  useEffect(() => {
+    if (isOpen) {
+      if (closeTimerRef.current) {
+        clearTimeout(closeTimerRef.current);
+        closeTimerRef.current = null;
+      }
+      setMounted(true);
+      // rAF ensures the browser has painted the hidden state before we add
+      // the visible class, which triggers the transition on iOS WebKit.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setVisible(true);
+        });
+      });
+    } else {
+      // Remove visible class first (triggers close transition), then unmount
+      setVisible(false);
+      closeTimerRef.current = setTimeout(() => {
+        setMounted(false);
+      }, 280); // matches transition duration in CSS
+    }
+    return () => {
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    };
+  }, [isOpen]);
 
   const handleNavClick = (item: typeof NAV_ITEMS[0]) => {
     onClose();
@@ -42,7 +76,7 @@ export function MobileNav({ isOpen, onClose, setLoading, setErrorMessage }: Mobi
 
   // Focus trap and initial focus
   useEffect(() => {
-    if (!isOpen || !drawerRef.current) return;
+    if (!visible || !drawerRef.current) return;
 
     // Store previously focused element
     previouslyFocusedRef.current = document.activeElement as HTMLElement;
@@ -82,7 +116,7 @@ export function MobileNav({ isOpen, onClose, setLoading, setErrorMessage }: Mobi
         previouslyFocusedRef.current.focus();
       }
     };
-  }, [isOpen]);
+  }, [visible]);
 
   useEffect(() => {
     if (isOpen) {
@@ -93,13 +127,13 @@ export function MobileNav({ isOpen, onClose, setLoading, setErrorMessage }: Mobi
     };
   }, [isOpen, handleKeyDown]);
 
-  if (!isOpen) return null;
+  if (!mounted) return null;
 
   return (
     <>
       {/* Backdrop */}
       <div
-        className="mobile-nav-backdrop"
+        className={`mobile-nav-backdrop${visible ? " mobile-nav-backdrop-visible" : ""}`}
         onClick={onClose}
         aria-hidden="true"
       />
@@ -107,7 +141,7 @@ export function MobileNav({ isOpen, onClose, setLoading, setErrorMessage }: Mobi
       {/* Drawer */}
       <div
         ref={drawerRef}
-        className="mobile-nav-drawer"
+        className={`mobile-nav-drawer${visible ? " mobile-nav-drawer-open" : ""}`}
         role="dialog"
         aria-label="Navigation menu"
       >

@@ -109,15 +109,30 @@
   }
 
   /* ── Mobile navigation drawer ── */
+  /* Backdrop — starts hidden, transitions to visible via .mobile-nav-backdrop-visible.
+   * Using CSS transitions (not @keyframes) avoids the iOS WebKit bug where
+   * freshly-inserted fixed elements don't animate from their @keyframes from-state. */
   .mobile-nav-backdrop {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
     z-index: 100;
-    animation: fadeIn 0.2s ease;
+    opacity: 0;
+    transition: opacity 0.22s ease;
+    /* Ensure GPU compositing on iOS */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
 
+  .mobile-nav-backdrop-visible {
+    opacity: 1;
+  }
+
+  /* Drawer — starts off-screen (translateX(-100%) + opacity 0), slides in via
+   * .mobile-nav-drawer-open. The double-rAF in MobileNav.tsx ensures the
+   * browser paints the initial hidden state before the class is added. */
   .mobile-nav-drawer {
     position: fixed;
     top: 0;
@@ -130,18 +145,24 @@
     z-index: 101;
     display: flex;
     flex-direction: column;
-    animation: slideInLeft 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+    /* Initial hidden state */
+    opacity: 0;
+    -webkit-transform: translateX(-100%) translateZ(0);
+    transform: translateX(-100%) translateZ(0);
+    transition:
+      transform 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.22s ease;
+    /* Force GPU layer on iOS to prevent compositing issues */
+    will-change: transform, opacity;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-
-  @keyframes slideInLeft {
-    from { transform: translateX(-100%); opacity: 0; }
-    to   { transform: translateX(0);     opacity: 1; }
+  .mobile-nav-drawer-open {
+    opacity: 1;
+    -webkit-transform: translateX(0) translateZ(0);
+    transform: translateX(0) translateZ(0);
   }
 
   .mobile-nav-header {

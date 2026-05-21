@@ -63,4 +63,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   </React.StrictMode>
 );
 
-start();
+// Defer start() by one task so that the history.replaceState call in index.html
+// (which restores the real path from the ?p= query param on GitHub Pages) has
+// been committed to window.location before single-spa evaluates activeWhen.
+// On iOS WebKit (used by both Safari and Chrome on iOS), replaceState called
+// in <head> scripts may not be reflected in location.pathname synchronously
+// when module scripts execute, causing all MFEs to miss their activeWhen check
+// and leaving a blank page after a hard refresh.
+setTimeout(() => {
+  start();
+}, 0);

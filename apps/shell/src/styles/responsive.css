@@ -243,7 +243,11 @@
   .arch-pane      { transform: translateX(100%); opacity: 1; }
   .arch-pane-open { transform: translateX(0); }
 
-  .mobile-nav-drawer { transform: translateX(-100%); opacity: 1; }
+  /* Transition-based drawer — skip transition, jump straight to final state */
+  .mobile-nav-drawer         { transform: translateX(-100%) translateZ(0); opacity: 1; }
+  .mobile-nav-drawer-open    { transform: translateX(0) translateZ(0); opacity: 1; }
+  .mobile-nav-backdrop       { opacity: 0; }
+  .mobile-nav-backdrop-visible { opacity: 1; }
 }
 
 /* ── Print ───────────────────────────────────────────────────────────────── */
