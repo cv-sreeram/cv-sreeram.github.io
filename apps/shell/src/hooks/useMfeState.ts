@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { onFrameworkActive, onMfeError, onMfeState } from "@my-portal/utils";
 import { NAV_ITEMS } from "../utils/navigation";
@@ -21,6 +21,13 @@ function isKnownMfePath(pathname: string): boolean {
   return NAV_ITEMS.some((item) => item.hasApp && pathname.startsWith(item.href));
 }
 
+// How long to wait for an MFE to signal ready before giving up and clearing
+// the loader. Angular is heavy so we give it more time.
+function getLoadTimeout(pathname: string): number {
+  if (pathname.startsWith("/about")) return 12000; // Angular
+  return 6000; // React, Vue, Web Components, Svelte
+}
+
 export function useMfeState(): MfeState {
   const location = useLocation();
   const [activeFramework, setActiveFramework] = useState("React");
@@ -29,6 +36,33 @@ export function useMfeState(): MfeState {
   const [loading, setLoading] = useState(() => isKnownMfePath(location.pathname));
   const [mfeStateMessage, setMfeStateMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const loadTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Clear any pending load timeout
+  const clearLoadTimeout = () => {
+    if (loadTimeoutRef.current !== null) {
+      clearTimeout(loadTimeoutRef.current);
+      loadTimeoutRef.current = null;
+    }
+  };
+
+  // Start a safety timeout whenever loading becomes true — if the MFE never
+  // signals ready/error (e.g. single-spa failed to activate it on iOS), we
+  // clear the loader so the user isn't stuck on an infinite spinner.
+  useEffect(() => {
+    if (!loading) {
+      clearLoadTimeout();
+      return;
+    }
+    clearLoadTimeout();
+    loadTimeoutRef.current = setTimeout(() => {
+      setLoading(false);
+      setMfeStateMessage("");
+    }, getLoadTimeout(location.pathname));
+
+    return clearLoadTimeout;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading]);
 
   useEffect(() => {
     const unsub = onFrameworkActive(({ framework }) => {
