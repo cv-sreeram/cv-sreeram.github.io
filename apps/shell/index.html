@@ -4,6 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sreeram CV | Micro-Frontend Portfolio</title>
+    <script>
+      // Restore the path encoded by 404.html for GitHub Pages SPA routing.
+      (function () {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+
+      // Handle the ?p= query param set by 404.html
+      (function () {
+        var query = window.location.search;
+        if (query.slice(0, 3) === "?p=") {
+          var decoded = query
+            .slice(3)
+            .replace(/~and~/g, "&")
+            .split("&q=");
+          var path = decoded[0];
+          var search = decoded[1] ? "?" + decoded[1].replace(/~and~/g, "&") : "";
+          window.history.replaceState(
+            null,
+            null,
+            path + search + window.location.hash
+          );
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

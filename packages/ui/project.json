@@ -7,7 +7,7 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "tsc",
+        "command": "echo 'ui is source-only; bundled by shell'",
         "cwd": "packages/ui"
       }
     },
