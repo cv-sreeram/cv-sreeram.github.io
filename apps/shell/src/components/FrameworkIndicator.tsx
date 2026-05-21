@@ -11,7 +11,7 @@ export function FrameworkIndicator({ activeFramework }: FrameworkIndicatorProps)
       aria-live="polite"
       aria-label={`Active framework: ${activeFramework}`}
     >
-      <span className="hidden md:flex items-center gap-1.5 text-xs font-medium text-muted opacity-50 tracking-wide whitespace-nowrap select-none">
+      <span className="hidden md:flex items-center gap-1.5 text-xs font-medium text-muted tracking-wide whitespace-nowrap select-none">
         Framework used
         <span className="opacity-60" aria-hidden="true">·</span>
       </span>

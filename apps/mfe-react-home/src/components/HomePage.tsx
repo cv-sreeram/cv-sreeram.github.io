@@ -182,11 +182,11 @@ const UPCOMING_FEATURES = [
 
 const BADGE_COLORS: Record<string, string> = {
   teal:   "var(--primary)",
-  amber:  "var(--warning)",
-  green:  "var(--success)",
-  blue:   "var(--info)",
-  purple: "#a855f7",
-  rose:   "#f43f5e",
+  amber:  "var(--warning-text)",
+  green:  "var(--success-text)",
+  blue:   "var(--info-text)",
+  purple: "var(--purple-text)",
+  rose:   "var(--rose-text)",
 };
 
 export function HomePage() {
@@ -302,10 +302,8 @@ function PortalCardInner({ feature }: { feature: typeof PORTAL_FEATURES[number] 
         </span>
         <span
           className="home-portal-badge"
-          style={{
-            color: BADGE_COLORS[feature.badgeColor],
-            background: `color-mix(in srgb, ${BADGE_COLORS[feature.badgeColor]} 12%, transparent)`,
-          }}
+          data-color={feature.badgeColor}
+          style={{ color: BADGE_COLORS[feature.badgeColor] }}
         >
           {feature.badge}
         </span>

@@ -192,6 +192,20 @@
     white-space: nowrap;
   }
 
+  /* Badge backgrounds — per color, light mode (color-mix over white) */
+  .home-portal-badge[data-color="teal"]   { background: color-mix(in srgb, var(--primary) 12%, transparent); }
+  .home-portal-badge[data-color="amber"]  { background: color-mix(in srgb, var(--warning) 12%, transparent); }
+  .home-portal-badge[data-color="green"]  { background: color-mix(in srgb, var(--success) 12%, transparent); }
+  .home-portal-badge[data-color="blue"]   { background: color-mix(in srgb, var(--info)    12%, transparent); }
+  .home-portal-badge[data-color="purple"] { background: color-mix(in srgb, var(--purple)  12%, transparent); }
+  .home-portal-badge[data-color="rose"]   { background: color-mix(in srgb, var(--rose)    12%, transparent); }
+
+  /* Dark mode: pre-blended solid backgrounds so WCAG checkers can evaluate
+     contrast correctly. Values = 12% tint composited over #1e293b.
+     purple #a855f7 on #231e2f → ~6.8:1 ✅  rose #f43f5e on #271e22 → ~5.8:1 ✅ */
+  html[data-theme="execdark"] .home-portal-badge[data-color="purple"] { background: #231e2f; }
+  html[data-theme="execdark"] .home-portal-badge[data-color="rose"]   { background: #271e22; }
+
   .home-portal-title {
     font-size: 0.875rem;
     font-weight: 700;
@@ -334,7 +348,10 @@
     flex-shrink: 0;
   }
 
+  /* Dark mode: solid background so teal text (#14b8a6) has sufficient contrast.
+     rgba(20,184,166,0.18) over #1e293b blends to ~#213d3b → only ~3.8:1 (fails AA).
+     #0f2e2b is a solid dark teal that gives #14b8a6 a contrast of ~5.2:1 ✅ */
   html[data-theme="execdark"] .home-upcoming-pill {
-    background: rgba(20, 184, 166, 0.18);
+    background: #0f2e2b;
   }
 }

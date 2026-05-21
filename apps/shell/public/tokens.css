@@ -45,9 +45,16 @@
   --primary-foreground: #ffffff;
   --accent: #0f766e;
   --info: #0ea5e9;
+  --info-text: #0369a1;
   --success: #16a34a;
+  --success-text: #166534;
   --warning: #d97706;
+  --warning-text: #92400e;
   --error: #dc2626;
+  --purple: #a855f7;
+  --purple-text: #7e22ce;
+  --rose: #f43f5e;
+  --rose-text: #be123c;
 
   --glass-bg: rgba(255, 255, 255, 0.92);
   --shadow: 0 1px 3px rgba(15, 23, 42, 0.08), 0 4px 16px rgba(15, 23, 42, 0.04);
@@ -76,9 +83,16 @@ html[data-theme="execdark"] {
   --primary-foreground: #0f172a;
   --accent: #14b8a6;
   --info: #60a5fa;
+  --info-text: #60a5fa;
   --success: #22c55e;
+  --success-text: #22c55e;
   --warning: #f59e0b;
+  --warning-text: #f59e0b;
   --error: #ef4444;
+  --purple: #a855f7;
+  --purple-text: #d8b4fe;
+  --rose: #f43f5e;
+  --rose-text: #fda4af;
 
   --glass-bg: rgba(15, 23, 42, 0.8);
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.2);
