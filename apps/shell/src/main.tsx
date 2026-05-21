@@ -93,4 +93,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   </React.StrictMode>
 );
 
-start();
+// Defer start() by one task. On iOS WebKit, even with the replaceState above,
+// yielding to the event loop ensures window.location is fully committed before
+// single-spa evaluates activeWhen for the first time.
+setTimeout(() => {
+  start();
+}, 0);

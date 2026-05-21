@@ -14,10 +14,19 @@ interface MfeState {
   setErrorMessage: (error: string) => void;
 }
 
+// On a hard refresh, determine if the current path maps to a known MFE so we
+// can show the loading state immediately rather than a blank page while the
+// MFE bundle downloads.
+function isKnownMfePath(pathname: string): boolean {
+  return NAV_ITEMS.some((item) => item.hasApp && pathname.startsWith(item.href));
+}
+
 export function useMfeState(): MfeState {
   const location = useLocation();
   const [activeFramework, setActiveFramework] = useState("React");
-  const [loading, setLoading] = useState(false);
+  // Start in loading state if the initial path is a known MFE route — this
+  // covers the hard-refresh case where single-spa hasn't mounted the MFE yet.
+  const [loading, setLoading] = useState(() => isKnownMfePath(location.pathname));
   const [mfeStateMessage, setMfeStateMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
