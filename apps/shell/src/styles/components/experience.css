@@ -1,0 +1,72 @@
+/*
+ * experience.css — Experience / work history card components
+ *
+ * Used by mfe-vue-page (experience route) in light DOM.
+ */
+
+@layer components {
+  .exp-company-header {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr auto;
+    align-items: start;
+    gap: 0.75rem;
+    margin-bottom: 0.875rem;
+  }
+
+  @media (max-width: 480px) {
+    .exp-company-header {
+      grid-template-columns: 2.5rem 1fr;
+      grid-template-rows: auto auto;
+    }
+
+    .exp-date-badge {
+      grid-column: 2;
+      margin-left: 0;
+    }
+  }
+
+  .exp-company-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-sm);
+    background: var(--primary);
+    color: var(--primary-foreground);
+    font-weight: 800;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .exp-company-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 0.1rem;
+  }
+
+  .exp-role {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .exp-date-badge {
+    font-size: 0.72rem;
+    color: var(--text-muted-strong);
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+    align-self: flex-start;
+  }
+
+  .exp-product {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.875rem;
+    line-height: 1.5;
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "shell",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "echo \"No lints configured for shell\""
+  },
+  "dependencies": {
+    "@my-portal/ui": "*",
+    "@my-portal/utils": "*",
+    "mfe-angular-about": "*",
+    "mfe-react-home": "*",
+    "mfe-svelte-page": "*",
+    "mfe-vue-page": "*",
+    "mfe-webcomponent-education": "*",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.14.2",
+    "single-spa": "^6.0.3"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "@vitejs/plugin-vue": "^4.2.0",
+    "autoprefixer": "^10.5.0",
+    "daisyui": "^4.12.24",
+    "postcss": "^8.5.10",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.1"
+  }
+}

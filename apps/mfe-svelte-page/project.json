@@ -1,0 +1,38 @@
+{
+  "name": "mfe-svelte-page",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/mfe-svelte-page/src",
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vite",
+        "cwd": "apps/mfe-svelte-page"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vite build",
+        "cwd": "apps/mfe-svelte-page"
+      },
+      "dependsOn": ["^build"]
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit",
+        "cwd": "apps/mfe-svelte-page"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo 'No lints configured for mfe-svelte-page'",
+        "cwd": "apps/mfe-svelte-page"
+      }
+    }
+  },
+  "tags": ["scope:app", "type:mfe", "framework:svelte"]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "mfe-angular-about",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/mfe-angular-about/src",
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vite",
+        "cwd": "apps/mfe-angular-about"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vite build",
+        "cwd": "apps/mfe-angular-about"
+      },
+      "dependsOn": ["^build"]
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit",
+        "cwd": "apps/mfe-angular-about"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo 'No lints configured for mfe-angular-about'",
+        "cwd": "apps/mfe-angular-about"
+      }
+    }
+  },
+  "tags": ["scope:app", "type:mfe", "framework:angular"]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "mfe-angular-about",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "echo \"No lints configured for mfe-angular-about\""
+  },
+  "dependencies": {
+    "@angular/common": "^18.2.5",
+    "@angular/compiler": "^18.2.5",
+    "@angular/core": "^18.2.5",
+    "@angular/platform-browser": "^18.2.5",
+    "@my-portal/utils": "*",
+    "zone.js": "~0.14.10"
+  },
+  "devDependencies": {
+    "sass": "^1.99.0",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.1"
+  }
+}

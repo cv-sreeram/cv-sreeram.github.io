@@ -1,0 +1,45 @@
+/*
+ * a11y.css — Accessibility utilities
+ *
+ * WCAG 2.2 AA: skip link and focus-visible ring.
+ * Shell-only (applied to light DOM).
+ */
+
+@layer components {
+  /* ── Skip link ── */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: 9999;
+    padding: 0.6rem 1.25rem;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .skip-link:focus {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  /* ── Focus-visible ring ── */
+  *:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}

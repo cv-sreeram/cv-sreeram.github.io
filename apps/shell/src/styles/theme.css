@@ -1,0 +1,28 @@
+/*
+ * theme.css — Shell design system entry point
+ *
+ * Import order matters:
+ *   1. tokens   — CSS custom properties (also consumed by Shadow DOM MFEs)
+ *   2. base     — Tailwind directives + html/body resets
+ *   3. components — feature-scoped component styles
+ *   4. responsive — breakpoint overrides (must come last)
+ */
+
+@import "./tokens.css";
+@import "./base.css";
+
+/* ── Components ── */
+@import "./components/a11y.css";
+@import "./components/cards.css";
+@import "./components/nav.css";
+@import "./components/hero.css";
+@import "./components/timeline.css";
+@import "./components/experience.css";
+@import "./components/micro-slots.css";
+@import "./components/side-rail.css";
+@import "./components/arch-pane.css";
+@import "./components/learn-pane.css";
+@import "./components/home.css";
+
+/* ── Responsive overrides ── */
+@import "./responsive.css";

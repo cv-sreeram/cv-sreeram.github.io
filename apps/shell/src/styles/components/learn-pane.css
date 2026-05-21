@@ -1,0 +1,160 @@
+/*
+ * learn-pane.css — Learning pane content styles
+ *
+ * Shell-only. Amber accent theme.
+ */
+
+@layer components {
+  .learn-tagline {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0 0 0.5rem;
+  }
+
+  .learn-badge-source {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.15rem 0.55rem;
+    border-radius: var(--radius-pill);
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    color: #d97706;
+    letter-spacing: 0.04em;
+  }
+
+  html[data-theme="execdark"] .learn-badge-source {
+    background: rgba(245, 158, 11, 0.15);
+    border-color: rgba(245, 158, 11, 0.35);
+    color: #fbbf24;
+  }
+
+  .learn-label-pro { color: #16a34a !important; }
+  html[data-theme="execdark"] .learn-label-pro { color: #4ade80 !important; }
+
+  .learn-label-con { color: #dc2626 !important; }
+  html[data-theme="execdark"] .learn-label-con { color: #f87171 !important; }
+
+  .learn-dot-pro { background: #16a34a !important; }
+  .learn-dot-con { background: #dc2626 !important; }
+  html[data-theme="execdark"] .learn-dot-con { background: #f87171 !important; }
+
+  .learn-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+  }
+
+  /* ── Core concepts table ── */
+  .learn-concepts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .learn-concept-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid #f59e0b;
+    transition: border-color 0.12s;
+  }
+
+  html[data-theme="execdark"] .learn-concept-row {
+    border-left-color: #fbbf24;
+  }
+
+  .learn-concept-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text);
+    font-family: ui-monospace, "Cascadia Code", monospace;
+  }
+
+  .learn-concept-desc {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* ── Code block ── */
+  .learn-code-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--text-muted-strong);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 0.4rem;
+  }
+
+  .learn-code {
+    font-family: ui-monospace, "Cascadia Code", "Fira Code", monospace;
+    font-size: 0.7rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.875rem;
+    margin: 0;
+    overflow-x: auto;
+    white-space: pre;
+    tab-size: 2;
+  }
+
+  html[data-theme="execdark"] .learn-code {
+    background: #0f172a;
+    border-color: rgba(148, 163, 184, 0.1);
+    color: #94a3b8;
+  }
+
+  /* ── Official links ── */
+  .learn-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .learn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #d97706;
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    background: rgba(245, 158, 11, 0.05);
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+
+  html[data-theme="execdark"] .learn-link {
+    color: #fbbf24;
+    border-color: rgba(245, 158, 11, 0.25);
+    background: rgba(245, 158, 11, 0.08);
+  }
+
+  .learn-link:hover {
+    border-color: rgba(245, 158, 11, 0.5);
+    background: rgba(245, 158, 11, 0.1);
+    color: #b45309;
+  }
+
+  html[data-theme="execdark"] .learn-link:hover {
+    border-color: rgba(245, 158, 11, 0.45);
+    background: rgba(245, 158, 11, 0.15);
+    color: #fde68a;
+  }
+
+  .learn-link-icon {
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+}

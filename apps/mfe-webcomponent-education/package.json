@@ -1,0 +1,19 @@
+{
+  "name": "mfe-webcomponent-education",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "echo \"No lints configured for mfe-webcomponent-education\""
+  },
+  "dependencies": {
+    "@my-portal/utils": "*",
+    "single-spa": "^6.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "vite": "^5.4.1"
+  }
+}

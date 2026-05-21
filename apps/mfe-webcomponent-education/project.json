@@ -1,0 +1,38 @@
+{
+  "name": "mfe-webcomponent-education",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/mfe-webcomponent-education/src",
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vite",
+        "cwd": "apps/mfe-webcomponent-education"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vite build",
+        "cwd": "apps/mfe-webcomponent-education"
+      },
+      "dependsOn": ["^build"]
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit",
+        "cwd": "apps/mfe-webcomponent-education"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo 'No lints configured for mfe-webcomponent-education'",
+        "cwd": "apps/mfe-webcomponent-education"
+      }
+    }
+  },
+  "tags": ["scope:app", "type:mfe", "framework:web-components"]
+}

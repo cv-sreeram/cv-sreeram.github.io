@@ -1,0 +1,21 @@
+{
+  "name": "mfe-svelte-page",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "echo \"No lints configured for mfe-svelte-page\""
+  },
+  "dependencies": {
+    "@my-portal/utils": "*",
+    "svelte": "^4.1.0",
+    "single-spa-svelte": "^2.1.1"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.1"
+  }
+}

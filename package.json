@@ -1,0 +1,34 @@
+{
+  "name": "my-portal",
+  "version": "1.0.0",
+  "description": "Single-SPA personal portfolio MVP",
+  "type": "module",
+  "scripts": {
+    "dev:shell": "nx run shell:serve",
+    "dev:react-home": "nx run mfe-react-home:serve",
+    "dev:angular-about": "nx run mfe-angular-about:serve",
+    "dev:experience": "nx run mfe-vue-page:serve",
+    "dev:micro-apps": "nx run mfe-svelte-page:serve",
+    "dev:svelte-page": "nx run mfe-svelte-page:serve",
+    "dev:vue-page": "nx run mfe-vue-page:serve",
+    "dev:all": "nx run-many -t serve --parallel",
+    "build": "nx run-many -t build --all",
+    "build:affected": "nx affected -t build",
+    "typecheck": "nx run-many -t typecheck --all",
+    "lint": "nx run-many -t lint --all",
+    "graph": "nx graph",
+    "smoke:local": "node ./scripts/smoke-local.mjs",
+    "smoke": "node ./scripts/smoke.mjs"
+  },
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@nx/js": "^22.7.1",
+    "@nx/vite": "^22.7.1",
+    "concurrently": "^9.2.1",
+    "nx": "^22.7.1"
+  }
+}

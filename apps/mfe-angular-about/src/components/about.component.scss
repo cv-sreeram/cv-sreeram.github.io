@@ -1,0 +1,258 @@
+// Angular About MFE — SCSS with CSS custom property consumption
+// All colour/spacing values reference the shell's design tokens via var(--*)
+
+// ── Mixins ──────────────────────────────────────────────────────────────────
+@mixin card-base {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 1.5rem;
+}
+
+@mixin section-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted-strong);
+}
+
+@mixin pill-base {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: var(--surface-strong);
+}
+
+// ── Page layout ──────────────────────────────────────────────────────────────
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-bottom: 2rem;
+
+  @media (max-width: 639px) {
+    padding-bottom: 5.5rem;
+  }
+}
+
+// ── Hero card ────────────────────────────────────────────────────────────────
+.hero-card {
+  @include card-base;
+  border-color: var(--primary);
+  border-width: 1px;
+
+  .card-body-tight {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .about-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+    margin: 0;
+  }
+
+  .about-heading {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .about-lead {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: 0;
+    max-width: 64ch;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+
+    .pill {
+      @include pill-base;
+    }
+  }
+}
+
+// ── Section card ─────────────────────────────────────────────────────────────
+.section-card {
+  @include card-base;
+  transition: border-color 0.15s ease;
+
+  &:hover {
+    border-color: rgba(13, 148, 136, 0.3);
+  }
+
+  .card-body-tight {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+}
+
+// ── Section title ─────────────────────────────────────────────────────────────
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+
+  .section-icon {
+    width: 1rem;
+    height: 1rem;
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+}
+
+// ── Timeline ──────────────────────────────────────────────────────────────────
+.about-timeline {
+  position: relative;
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .about-timeline-item {
+    position: relative;
+    padding-bottom: 1.5rem;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+
+  .about-timeline-dot {
+    position: absolute;
+    left: -1.4rem;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 2px solid var(--surface);
+    box-shadow: 0 0 0 2px var(--primary);
+    flex-shrink: 0;
+  }
+
+  .about-timeline-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .about-timeline-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .about-timeline-company {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .about-timeline-date {
+    font-size: 0.72rem;
+    color: var(--text-muted-strong);
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
+    padding: 0.1rem 0.5rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+  }
+
+  .about-timeline-role {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--primary);
+    margin: 0;
+  }
+
+  .about-timeline-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+// ── Impact list ───────────────────────────────────────────────────────────────
+.impact-list {
+  padding-left: 1.25rem;
+  margin: 0;
+
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+    color: var(--text);
+    font-size: 0.875rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// ── Contact links ─────────────────────────────────────────────────────────────
+.about-contact-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.about-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--primary);
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-strong);
+  transition: border-color 0.15s, background 0.15s;
+
+  &:hover {
+    border-color: var(--primary);
+    background: var(--surface-alt);
+  }
+
+  .about-contact-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+}

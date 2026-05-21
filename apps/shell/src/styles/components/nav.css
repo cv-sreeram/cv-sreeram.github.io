@@ -1,0 +1,222 @@
+/*
+ * nav.css — Top navigation bar, nav pills, mobile drawer
+ *
+ * Shell-only. These classes are applied to shell React components.
+ */
+
+@layer components {
+  .glass-nav {
+    @apply border-b backdrop-blur;
+    background-color: var(--glass-bg);
+    border-color: var(--border);
+  }
+
+  /* ── Nav monogram avatar ── */
+  .nav-monogram {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    letter-spacing: -0.02em;
+  }
+
+  /* ── Nav pills ── */
+  .nav-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    transition: all 0.15s ease;
+  }
+
+  .nav-pill:hover {
+    background: var(--surface-strong);
+    color: var(--text);
+    border-color: var(--primary);
+  }
+
+  .nav-pill-active {
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.12) 0%, rgba(13, 148, 136, 0.04) 100%);
+    border-color: var(--primary);
+    color: var(--primary);
+    box-shadow: 0 2px 8px rgba(13, 148, 136, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  html[data-theme="execdark"] .nav-pill-active {
+    background: linear-gradient(135deg, rgba(45, 212, 191, 0.15) 0%, rgba(45, 212, 191, 0.05) 100%);
+    border-color: var(--primary);
+    color: var(--primary);
+    box-shadow: 0 2px 12px rgba(45, 212, 191, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* ── Theme toggle button ── */
+  .nav-theme-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--surface-strong);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .nav-theme-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  /* ── Horizontal scroll container (mobile nav) ── */
+  .nav-scroll-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    mask-image: linear-gradient(to right, transparent, black 8px, black calc(100% - 8px), transparent);
+  }
+
+  .nav-scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .nav-scroll-container {
+      mask-image: none;
+      overflow-x: visible;
+    }
+  }
+
+  /* ── Mobile menu button ── */
+  .mobile-menu-btn {
+    display: none; /* shown via responsive.css at ≤639px */
+  }
+
+  /* ── Mobile navigation drawer ── */
+  .mobile-nav-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    animation: fadeIn 0.2s ease;
+  }
+
+  .mobile-nav-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    max-width: 85vw;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    z-index: 101;
+    display: flex;
+    flex-direction: column;
+    animation: slideInLeft 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes slideInLeft {
+    from { transform: translateX(-100%); opacity: 0; }
+    to   { transform: translateX(0);     opacity: 1; }
+  }
+
+  .mobile-nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mobile-nav-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text);
+  }
+
+  .mobile-nav-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .mobile-nav-close:hover {
+    background: var(--surface-strong);
+    color: var(--text);
+    border-color: var(--primary);
+  }
+
+  .mobile-nav-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .mobile-nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.875rem 1rem;
+    border-radius: var(--radius-sm);
+    border: none;
+    background: transparent;
+    color: var(--text);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: left;
+  }
+
+  .mobile-nav-item:hover {
+    background: var(--surface-soft);
+  }
+
+  .mobile-nav-item-active {
+    background: rgba(13, 148, 136, 0.08);
+    color: var(--primary);
+  }
+
+  html[data-theme="execdark"] .mobile-nav-item-active {
+    background: rgba(45, 212, 191, 0.1);
+  }
+
+  .mobile-nav-item-label {
+    flex: 1;
+  }
+}

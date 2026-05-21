@@ -1,0 +1,261 @@
+/*
+ * responsive.css — Breakpoint overrides
+ *
+ * Mobile-first. Breakpoints: 639px, 640px, 768px, 1024px, 1280px, 1440px, 1920px.
+ * Depends on tokens.css and all component files being loaded first.
+ */
+
+/* ── Mobile (≤639px) ─────────────────────────────────────────────────────── */
+@media (max-width: 639px) {
+  .shell-container {
+    @apply px-3 py-4;
+    max-width: 100%;
+  }
+
+  /* Show mobile menu button */
+  .mobile-menu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface-strong);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .mobile-menu-btn:hover {
+    background: var(--surface);
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  /* Space for bottom navigation */
+  #main-content {
+    padding-bottom: 80px;
+  }
+
+  /* Hero actions — single row */
+  .hero-actions {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+
+  .hero-button {
+    @apply px-3.5 py-2;
+    font-size: 0.8125rem;
+    white-space: nowrap;
+  }
+
+  .brand-logo       { font-size: 1.125rem; }
+  .framework-indicator { @apply text-xs px-2 py-1; }
+
+  /* Side rail → bottom navigation bar */
+  .side-rail {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    transform: none;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0.5rem 0.75rem;
+    gap: 0.5rem;
+    border-radius: 1.25rem 1.25rem 0 0;
+    border-top: 1px solid var(--border);
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    z-index: 60;
+    backdrop-filter: blur(20px) saturate(180%);
+  }
+
+  .side-rail-shifted { transform: none; }
+
+  .side-rail-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+  }
+
+  /* Hide tooltips and decorative dots on mobile */
+  .side-rail-tooltip { display: none; }
+  .side-rail-dot     { display: none; }
+
+  /* Side pane → full-screen modal */
+  .arch-pane {
+    width: 100vw;
+    max-width: 100vw;
+    top: 0;
+    bottom: 0;
+    border-left: none;
+  }
+
+  .loading-state { @apply px-3; }
+  .empty-state   { @apply px-4 py-12; }
+  .empty-state-icon { @apply w-12 h-12; }
+  .error-state   { @apply px-4 py-8; }
+}
+
+/* ── Tablet (640px – 767px) ──────────────────────────────────────────────── */
+@media (min-width: 640px) and (max-width: 767px) {
+  .shell-container {
+    @apply px-4 py-5;
+    max-width: 100%;
+  }
+
+  .side-rail {
+    right: 0.75rem;
+    padding: 0.625rem 0.5rem;
+    gap: 0.4rem;
+  }
+
+  .side-rail-btn { width: 40px; height: 40px; }
+
+  .side-rail-shifted {
+    transform: translateY(-50%) translateX(calc(-360px - 0.75rem));
+  }
+
+  .arch-pane { width: 360px; }
+}
+
+/* ── Desktop Small (768px – 1023px) ─────────────────────────────────────── */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .shell-container {
+    max-width: 100%;
+    @apply px-6 py-6;
+  }
+
+  .side-rail-shifted {
+    transform: translateY(-50%) translateX(calc(-380px - 1rem));
+  }
+
+  .arch-pane { width: 380px; }
+}
+
+/* ── Desktop (≥1024px) ───────────────────────────────────────────────────── */
+@media (min-width: 1024px) {
+  .shell-container {
+    max-width: 1024px;
+    @apply px-8 py-8;
+  }
+
+  .side-rail { right: 1.5rem; }
+}
+
+/* ── Desktop Large (≥1280px) ─────────────────────────────────────────────── */
+@media (min-width: 1280px) {
+  .shell-container { max-width: 1200px; }
+}
+
+/* ── Extra Large (≥1440px) ───────────────────────────────────────────────── */
+@media (min-width: 1440px) {
+  .shell-container {
+    max-width: 1320px;
+    padding: 2rem 3rem;
+  }
+
+  .side-rail {
+    right: 1.75rem;
+    padding: 0.875rem 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .side-rail-btn { width: 48px; height: 48px; }
+
+  .arch-pane { width: 420px; }
+
+  .side-rail-shifted {
+    transform: translateY(-50%) translateX(calc(-420px - 1.75rem));
+  }
+}
+
+/* ── Ultra Wide (≥1920px) ────────────────────────────────────────────────── */
+@media (min-width: 1920px) {
+  .shell-container { max-width: 1600px; }
+}
+
+/* ── Touch devices ───────────────────────────────────────────────────────── */
+@media (hover: none) and (pointer: coarse) {
+  .side-rail-btn { min-height: 48px; min-width: 48px; }
+  .nav-pill      { min-height: 40px; }
+
+  /* Remove hover scale effects */
+  .side-rail-btn:hover {
+    transform: none;
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    color: var(--text-muted);
+  }
+
+  .side-rail-btn:hover .side-rail-btn-bg { opacity: 0; }
+
+  .side-rail-btn:active {
+    transform: scale(0.93);
+    transition-duration: 0.08s;
+  }
+}
+
+/* ── Safe area insets (notched phones) ───────────────────────────────────── */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  @media (max-width: 639px) {
+    .side-rail {
+      padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+    }
+
+    #main-content {
+      padding-bottom: calc(80px + env(safe-area-inset-bottom));
+    }
+  }
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .side-rail,
+  .arch-pane,
+  .arch-overlay,
+  .side-rail-btn,
+  .nav-pill,
+  .mobile-nav-drawer,
+  .mobile-nav-backdrop,
+  .hero-visual-card::before,
+  .hero-visual-card::after {
+    transition: none;
+    animation: none;
+  }
+
+  .arch-pane      { transform: translateX(100%); opacity: 1; }
+  .arch-pane-open { transform: translateX(0); }
+
+  .mobile-nav-drawer { transform: translateX(-100%); opacity: 1; }
+}
+
+/* ── Print ───────────────────────────────────────────────────────────────── */
+@media print {
+  .skip-link,
+  .side-rail,
+  .arch-pane,
+  .arch-overlay,
+  .theme-toggle,
+  .mobile-menu-btn,
+  .mobile-nav-backdrop,
+  .mobile-nav-drawer,
+  .glass-nav {
+    display: none !important;
+  }
+
+  .app-shell {
+    color: black;
+    background: white;
+  }
+
+  #main-content {
+    padding: 0;
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,35 @@
+/*
+ * base.css — Tailwind directives + global html/body/root resets
+ *
+ * Shell-only. Not suitable for Shadow DOM adoption.
+ * Depends on tokens.css being loaded first.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    height: 100%;
+    background: var(--body-bg);
+    color: var(--text);
+    font-size: var(--font-size-base);
+  }
+
+  body,
+  #root {
+    min-height: 100%;
+    color: var(--text);
+    font-size: var(--font-size-base);
+  }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at 15% 0%, var(--body-gradient-1), transparent 30%),
+      radial-gradient(circle at 90% 10%, var(--body-gradient-2), transparent 30%),
+      var(--body-bg);
+
+  }
+}

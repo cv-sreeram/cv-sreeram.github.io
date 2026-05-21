@@ -1,0 +1,85 @@
+/*
+ * tokens.css — Design tokens (CSS custom properties)
+ *
+ * This file is the single source of truth for all design tokens.
+ * It is intentionally framework-agnostic and contains NO Tailwind directives,
+ * so it can be safely fetched and adopted by Shadow DOM consumers
+ * (e.g. mfe-webcomponent-education) at runtime.
+ *
+ * Usage in Shadow DOM:
+ *   const sheet = new CSSStyleSheet();
+ *   const text = await fetch('/tokens.css').then(r => r.text());
+ *   sheet.replaceSync(text);
+ *   shadowRoot.adoptedStyleSheets = [sheet, ...localSheets];
+ */
+
+/* ── Light theme (default) ─────────────────────────────────────────────────── */
+:root {
+  --radius: 0.75rem;
+  --radius-md: 0.625rem;
+  --radius-sm: 0.5rem;
+  --radius-pill: 9999px;
+
+  --font-size-base: 1rem;
+  --font-size-sm: 0.92rem;
+  --font-size-lg: 1.05rem;
+
+  --body-bg: #f8fafc;
+  --body-gradient-1: transparent;
+  --body-gradient-2: transparent;
+
+  --surface: #ffffff;
+  --surface-soft: #f1f5f9;
+  --surface-strong: #f1f5f9;
+  --surface-alt: #e2e8f0;
+
+  --text: #0f172a;
+  --text-rgb: 15, 23, 42;
+  --text-muted: #475569;
+  --text-muted-strong: #5c6e82;
+
+  --border: rgba(15, 23, 42, 0.08);
+  --border-soft: rgba(15, 23, 42, 0.05);
+
+  --primary: #0f766e;
+  --primary-foreground: #ffffff;
+  --accent: #0f766e;
+  --info: #0ea5e9;
+  --success: #16a34a;
+  --warning: #d97706;
+  --error: #dc2626;
+
+  --glass-bg: rgba(255, 255, 255, 0.92);
+  --shadow: 0 1px 3px rgba(15, 23, 42, 0.08), 0 4px 16px rgba(15, 23, 42, 0.04);
+}
+
+/* ── Dark theme ─────────────────────────────────────────────────────────────── */
+html[data-theme="execdark"] {
+  --body-bg: #0f172a;
+  --body-gradient-1: rgba(13, 148, 136, 0.06);
+  --body-gradient-2: rgba(13, 148, 136, 0.03);
+
+  --surface: #1e293b;
+  --surface-soft: rgba(30, 41, 59, 0.8);
+  --surface-strong: #263447;
+  --surface-alt: #172032;
+
+  --text: #e2e8f0;
+  --text-rgb: 226, 232, 240;
+  --text-muted: #94a3b8;
+  --text-muted-strong: #94a3b8;
+
+  --border: rgba(148, 163, 184, 0.12);
+  --border-soft: rgba(148, 163, 184, 0.06);
+
+  --primary: #14b8a6;
+  --primary-foreground: #0f172a;
+  --accent: #14b8a6;
+  --info: #60a5fa;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #ef4444;
+
+  --glass-bg: rgba(15, 23, 42, 0.8);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.2);
+}

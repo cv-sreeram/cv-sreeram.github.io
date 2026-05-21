@@ -1,0 +1,134 @@
+/*
+ * cards.css — Card primitives, section titles, eyebrow/lead typography
+ *
+ * Shared visual language used by shell layout and consumed as class names
+ * by Angular, Vue, Svelte, and React MFEs (light DOM, not Shadow DOM).
+ */
+
+@layer components {
+  .app-shell {
+    color: var(--text);
+  }
+
+  .shell-container {
+    @apply mx-auto w-full max-w-6xl px-4 py-6 md:px-6;
+  }
+
+  /* ── Card primitives ── */
+  .hero-card,
+  .section-card,
+  .state-panel,
+  .card-body-tight {
+    background: var(--surface);
+  }
+
+  .hero-card {
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+
+  .section-card {
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    transition: border-color 0.15s ease;
+  }
+
+  .section-card:hover {
+    border-color: rgba(13, 148, 136, 0.3);
+  }
+
+  html[data-theme="execdark"] .section-card:hover {
+    border-color: rgba(45, 212, 191, 0.25);
+  }
+
+  .card-body-tight {
+    padding: 1.5rem;
+  }
+
+  .state-panel {
+    border: 1px solid var(--border-soft);
+    background: var(--surface-soft);
+  }
+
+  .state-panel-icon {
+    @apply mb-3 inline-flex h-12 w-12 items-center justify-center rounded-full;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    color: var(--text);
+  }
+
+  /* ── Pill ── */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    background: var(--surface-strong);
+  }
+
+  .meta-row {
+    @apply mt-2 flex flex-wrap gap-2;
+  }
+
+  /* ── Shared page header typography (About, Experience, Micro Apps) ── */
+  .about-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+    margin-bottom: 0.4rem;
+  }
+
+  .about-heading {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .about-lead {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 0;
+    max-width: 64ch;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  .section-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+
+  /* ── Utility colour helpers ── */
+  .text-content  { color: var(--text); }
+  .text-muted    { color: var(--text-muted); }
+  .text-muted-strong { color: var(--text-muted-strong); }
+
+  .bg-surface       { background: var(--surface); }
+  .bg-surface-soft  { background: var(--surface-soft); }
+  .bg-surface-strong { background: var(--surface-strong); }
+  .bg-surface-alt   { background: var(--surface-alt); }
+
+  .border-surface      { border-color: var(--border); }
+  .border-surface-soft { border-color: var(--border-soft); }
+}
