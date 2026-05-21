@@ -53,16 +53,7 @@
   .brand-logo       { font-size: 1.125rem; }
   .framework-indicator { @apply text-xs px-2 py-1; }
 
-  /* Side rail → bottom navigation bar.
-   *
-   * iOS browser-chrome collapse problem:
-   * When the user scrolls and Safari/Chrome hides its toolbar, the *visual*
-   * viewport grows but the *layout* viewport (which position:fixed uses) does
-   * not. This leaves a gap between the bar and the real screen bottom.
-   *
-   * Fix: use padding-bottom to absorb the safe-area inset AND add a
-   * ::after pseudo-element that extends the background colour downward to
-   * fill whatever gap the browser chrome collapse exposes. */
+  /* Side rail → bottom navigation bar */
   .side-rail {
     position: fixed;
     left: 0;
@@ -72,10 +63,7 @@
     transform: none;
     flex-direction: row;
     justify-content: center;
-    /* Top padding stays 0.5rem; bottom padding covers safe-area + extra buffer
-       so the bar background always reaches the physical screen edge. */
-    padding: 0.5rem 0.75rem 0;
-    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+    padding: 0.5rem 0.75rem;
     gap: 0.5rem;
     border-radius: 1.25rem 1.25rem 0 0;
     border-top: 1px solid var(--border);
@@ -84,24 +72,6 @@
     border-bottom: none;
     z-index: 60;
     backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-  }
-
-  /* Extend the bar's background below its bottom edge to fill the gap that
-   * appears when the iOS browser toolbar collapses during scroll. */
-  .side-rail::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    /* Sits just below the bar, tall enough to cover the toolbar-collapse gap
-       (~83px on iPhone) plus safe-area inset. */
-    top: 100%;
-    height: calc(100px + env(safe-area-inset-bottom));
-    background: inherit;
-    backdrop-filter: inherit;
-    -webkit-backdrop-filter: inherit;
-    pointer-events: none;
   }
 
   .side-rail-shifted { transform: none; }
@@ -240,8 +210,10 @@
 /* ── Safe area insets (notched phones) ───────────────────────────────────── */
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   @media (max-width: 639px) {
-    /* #main-content needs enough bottom padding to clear the bar + safe area.
-       The bar itself is ~72px tall; add safe-area-inset-bottom on top. */
+    .side-rail {
+      padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+    }
+
     #main-content {
       padding-bottom: calc(80px + env(safe-area-inset-bottom));
     }
