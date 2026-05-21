@@ -6,6 +6,23 @@ import { AppShell } from "./shell";
 import "./styles/theme.css";
 import { emitMfeError } from "@my-portal/utils";
 
+// ── GitHub Pages SPA path restoration ────────────────────────────────────────
+// On iOS WebKit, history.replaceState called in an inline <head> script may
+// not be reflected in window.location.pathname by the time this ES module
+// executes. We re-run the same restoration here — synchronously, as the very
+// first thing — so that both BrowserRouter (which reads window.location at
+// construction time) and single-spa activeWhen always see the real pathname.
+(function () {
+  var query = window.location.search;
+  if (query.slice(0, 3) === "?p=") {
+    var decoded = query.slice(3).replace(/~and~/g, "&").split("&q=");
+    var path = decoded[0];
+    var search = decoded[1] ? "?" + decoded[1].replace(/~and~/g, "&") : "";
+    window.history.replaceState(null, "", path + search + window.location.hash);
+  }
+})();
+// ─────────────────────────────────────────────────────────────────────────────
+
 registerApplication({
   name: "mfe-react-home",
   app: () => import("mfe-react-home/src/single-spa"),
@@ -63,13 +80,4 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   </React.StrictMode>
 );
 
-// Defer start() by one task so that the history.replaceState call in index.html
-// (which restores the real path from the ?p= query param on GitHub Pages) has
-// been committed to window.location before single-spa evaluates activeWhen.
-// On iOS WebKit (used by both Safari and Chrome on iOS), replaceState called
-// in <head> scripts may not be reflected in location.pathname synchronously
-// when module scripts execute, causing all MFEs to miss their activeWhen check
-// and leaving a blank page after a hard refresh.
-setTimeout(() => {
-  start();
-}, 0);
+start();
